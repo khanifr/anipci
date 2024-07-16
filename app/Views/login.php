@@ -60,7 +60,12 @@
                                 customers.
                             </p>
 
-                            <?= session()->getFlashdata('pesan') ?>
+                            <?php if (!empty(session()->getFlashdata('pesan'))) : ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?= session()->getFlashdata('pesan') ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif ?>
 
                             <form method="POST" action="<?= base_url('login') ?>">
                                 <div class="row">
@@ -69,7 +74,7 @@
                                             <label>Username</label>
                                             <input type="text" class="<?= ($validation->hasError('username')) ? 'is-invalid' : '' ?> form-control" placeholder="Username" name="username" />
                                             <div class="invalid-feedback">
-                                                <?php $validation->getError('username') ?>
+                                                <?= $validation->getError('username') ?>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +85,7 @@
                                         <label>Password</label>
                                         <input type="password" class="<?= ($validation->hasError('password')) ? 'is-invalid' : '' ?> form-control" placeholder="Password" name="password" />
                                         <div class="invalid-feedback">
-                                            <?php $validation->getError('password') ?>
+                                            <?= $validation->getError('password') ?>
                                         </div>
                                     </div>
                                 </div>
